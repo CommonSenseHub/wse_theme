@@ -1,0 +1,24 @@
+{% if layout.columns %}
+  <div class="container">
+    {% if layout.title %}
+      <div class="row">
+        <div class="col col-center text-center">
+          {% if layout.title %}
+            <h2 class="heading">{{layout.title}}</h2>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    <div class="row {% if layout.columns_settings %} {{layout.columns_settings|join(' ')}} {% endif %}">
+      {% for column in layout.columns %}
+        <div class="col-md-{% if column.size %}{{column.size}}{% else %}{{ 12 / loop.length }}{% endif %} {% if column.column_settings %} {{column.column_settings|join(' ')}} {% endif %}">
+          {% if column.type == "image" %}
+            <img src="{{column.image.url|resize(1280, 850)}}" alt="{{column.image.title}}">
+          {% elseif column.type == "content" %}
+            {{column.content}}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

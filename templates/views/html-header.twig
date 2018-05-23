@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html {{ site.language_attributes }}>
+<head>
+  <meta charset="{{ site.charset }}">
+  <script>
+   WebFontConfig = {
+      typekit: { id: 'znd0trn' }
+   };
+   (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+      wf.async = true;
+      s.parentNode.insertBefore(wf, s);
+   })(document);
+</script>
+  <title>
+    {% if wp_title %}
+      {{ wp_title }} - {{ site.name }}
+    {% else %}
+      {{ site.name }}
+    {% endif %}
+  </title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ theme.link }}/public/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ theme.link }}/public/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ theme.link }}/public/favicon-16x16.png">
+  <link rel="manifest" href="{{ theme.link }}/public/site.webmanifest">
+  <link rel="mask-icon" href="{{ theme.link }}/public/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="theme-color" content="#ffffff">
+
+
+  {{function('wp_head')}}

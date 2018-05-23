@@ -1,0 +1,34 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
+		<header class="article-header">
+			<figure class="article-image">
+				<img src="{{ post.thumbnail.src|resize(1280, 720) }}">
+			</figure>
+		</header>
+
+		<section class="article-content">
+			<h1>{{ post.title }}</h1>
+			<p class="article-author">
+				<a href="{{post.author.path}}">{{ post.author.name }}</a> {{ post.date }}
+			</p>
+			<div class="article-body">
+				{{post.content}}
+			</div>
+		</section>
+
+		<section class="article-comments">
+			<div class="comments">
+				{% if post.comments %}
+					<h3 class="h2">{{ __('Comments', 'blendid') }}</h3>
+					{% for cmt in post.comments %}
+						{% include "comment.twig" with { comment: cmt } %}
+					{% endfor %}
+				{% endif %}
+			</div>
+
+			{% include "comment-form.twig" %}
+		</section>
+	</article>
+{% endblock %}
