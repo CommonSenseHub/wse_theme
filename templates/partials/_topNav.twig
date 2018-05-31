@@ -1,0 +1,11 @@
+<div class="top-nav wrapper">
+  <div class="container">
+    <ul>
+      {% if options.label_info %}
+        <li class="email"><i class="icon-email"></i> <span class="label">{{options.label_info}}</span> <a href="mailto:{{options.emailtop}}">{{ options.email_top }}</a></li>
+      {% endif %}
+       <li class="phone"><i class="icon-phone"></i> <span class="label">{{ options.label_phone }}</span> <span class="free-__phone"><a href="tel:{{options.number_free}}">{{ options.number_free  }}</a></span> <a href="{{ options.phone_number }}">{{ options.phone_number }}</a></li>
+       <li class="admin--phone"><span class="label">{{ options.label_admin }}</span> <a href="{{ options.phone_admin}}">{{ options.phone_admin }}</a></li>
+    </ul>
+  </div>
+</div><!--/top-nav-->

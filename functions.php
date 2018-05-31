@@ -1,4 +1,3 @@
-
 <?php
 
 if (file_exists($composer = __DIR__ . '/vendor/autoload.php')) {
@@ -13,9 +12,9 @@ Routes::map('clear-cache', function($params){
   $loader = new TimberLoader();
   $loader->clear_cache_timber();
   $loader->clear_cache_twig();
-  
+
   wp_redirect(home_url());
-  
+
   exit;
 });
 

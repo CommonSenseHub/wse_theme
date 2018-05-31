@@ -6,11 +6,11 @@ if ( ! class_exists( 'Timber' ) ) {
   add_action( 'admin_notices', function() {
     echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php') ) . '</a></p></div>';
   });
-  
+
   add_filter('template_include', function($template) {
     return get_stylesheet_directory() . '/public/no-timber.html';
   });
-  
+
   return;
 }
 
@@ -41,8 +41,8 @@ class BlendidStarter extends TimberSite {
   function add_to_context( $context ) {
     $context['menu'] = new TimberMenu();
     $context['site'] = $this;
+    $context['options'] = get_fields('options');
     $context['icons_path'] = \App\asset_path( 'images/icons.svg' );
-
     return $context;
   }
 
@@ -58,6 +58,11 @@ class BlendidStarter extends TimberSite {
 
     return $twig;
   }
+
+}
+if( function_exists('acf_add_options_page') ) {
+
+	acf_add_options_page();
 
 }
 
