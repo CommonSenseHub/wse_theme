@@ -1,5 +1,84 @@
 {% set counters = [] %}
 
 {% if post.get_field('blocks') %}
+    {% for layout in post.get_field('blocks') %}
+      {% set row_layout = layout.acf_fc_layout %}
+      {% if counters[row_layout] is defined %}
+        {% set counters = counters|merge({(row_layout):(counters[row_layout] + counters[row_layout])}) %}
+      {% else %}
+        {% set counters = counters|merge({(row_layout):(1)}) %}
+      {% endif %}
+      {% if layout.acf_fc_layout == "content_block" %}
+        <section class="panel panel ptxl pbs{% if layout.layout_settings %} {{ layout.layout_settings|join(' ') }} {% endif %}">
+          {% if layout.columns %}
+            <div class="container">
+              {% if layout.title %}
+                <div class="row">
+                  <div class="col col-center text-center">
+                    {% if layout.title %}
+                      <h2 class="heading">{{layout.title}}</h2>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+              <div class="row {% if layout.columns_settings %} {{layout.columns_settings|join(' ')}} {% endif %}">
+                {% for column in layout.columns %}
+                  <div class="col-md-{% if column.size %}{{column.size}}{% else %}{{ 12 / loop.length }}{% endif %} {% if column.column_settings %} {{column.column_settings|join(' ')}} {% endif %}">
+                    {% if column.type == "image" %}
+                      <img src="{{column.image.url}}" alt="{{column.image.title}}">
+                    {% elseif column.type == "content" %}
+                      {{column.content}}
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        </section>
+        {% elseif layout.acf_fc_layout == "cards_block"%}
+        <section class="panel panel ptxl {{ layout.class_block }}" style="background-color: {{layout.background_color}}">
+          {% if layout.title_card_block|length %}
+          <div class="wrapper">
+            <header>
+              <h2>{{layout.title_card_block}}</h2>
+            </header>
+            {{ layout.text_block_card }}
+          </div>
+          {% endif %}
+        </section>
+        {% elseif layout.acf_fc_layout == "title_block" %}
+
+        <section id="title-block-{{ counters[row_layout] }}" class="block title-block">
+
+        </section>
+
+      {% elseif layout.acf_fc_layout == "gallery_block" %}
+
+        <section id="gallery-block-{{ counters[row_layout] }}" class="block gallery-block">
+
+        </section>
+
+      {% elseif layout.acf_fc_layout == "slideshow_block" %}
+
+        <section id="slideshow-block-{{counters[row_layout]}}" class="block slideshow-block">
+
+        </section>
+
+      {% elseif layout.acf_fc_layout == "post_block" %}
+
+        <section id="post-block-{{ counters[row_layout] }}" class="block post-block">
+
+        </section>
+
+      {% elseif layout.acf_fc_layout == "form_block" %}
+
+        <section id="form-block-{{ counters[row_layout] }}" class="block form-block">
+
+        </section>
+
+      {% endif %}
+    {% endfor %}
+
+
 
 {% endif %}
