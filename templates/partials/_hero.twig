@@ -1,0 +1,24 @@
+{% if post.hero_image_desktop|length %}
+<section class="hero desktop-only hero__desktop">
+    {% set desktop = TimberImage(post.hero_image_desktop).src %}
+    {% set tablet = TimberImage(post.hero_image_tablet).src %}
+    {% set mobile = TimberImage(post.hero_image_mobile).src %}
+    <section class="js--slider">
+      <div class="item-slider">
+        <div class="hero--media">
+          <picture>
+              <source srcset="{{desktop}}" media="(min-width: 1050px)">
+              <source srcset="{{ tablet }}" media="(min-width: 850px)">
+              <img srcset="{{mobile}}" src="{{mobile}}" alt="{{image.alt}} {{post.title}}">
+          </picture>
+          <div class="hero--text wrapper" style="opacity: 1;">
+            <h2>{{post.hero_head}} hola</h2>
+            <p>{{post.hero_text}}</p>
+            <a href="{{post.hero_url}}" class="link link--red link--red_arrow">{{post.hero_label}}</a>
+          </div>
+        </div>
+      </div>
+
+    </section><!--Hero-->
+</section>
+{% endif %}

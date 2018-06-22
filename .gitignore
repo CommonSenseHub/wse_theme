@@ -8,3 +8,4 @@ src
 acf-json
 config
 node_modules
+yarn-error.log

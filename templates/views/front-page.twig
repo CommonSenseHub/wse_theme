@@ -1,5 +1,7 @@
 {% extends "base.twig" %}
-
+{% block before_content %}
+    {% include 'partials/_hero.twig' with { class: '-page' } %}
+{% endblock %}
 {% block content %}
 
 {% endblock %}
